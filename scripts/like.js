@@ -5,5 +5,23 @@ function c(e){return e.closest(A.card)}
 function i(){ $$(A.iconBtn).forEach(b=>{ b.setAttribute('aria-label','Like'); b.setAttribute('aria-pressed','false'); const s=$('.like-icon',b); if(s){s.setAttribute('aria-hidden','true'); s.setAttribute('focusable','false')} b.addEventListener('click',h) }); $$(A.textBtn).forEach(b=>{ const l=$(A.btnText,b); if(l)l.textContent='Like'; b.setAttribute('aria-label','Like'); b.addEventListener('click',h) }) }
 function u(t,liked){ const l=$(A.btnText,t); if(!l) return; setTimeout(()=>{ l.textContent = liked ? 'Unlike' : 'Like' },300) }
 function h(evt){ const t=evt.currentTarget; const cr=c(t); if(!cr) return; const heart=$(A.heart,cr); const tb=$(A.textBtn,cr); if(!heart) return; const liked = heart.classList.toggle('is-liked'); const ib = t.closest(A.iconBtn) || $(A.iconBtn,cr); if(ib) ib.setAttribute('aria-pressed', liked ? 'true' : 'false'); if(tb) u(tb,liked) }
-function d(){ const o=$(A.openDialog); const x=$(A.closeDialog); const dlg=document.getElementById('dialog'); if(o && dlg) o.addEventListener('click', ()=>{ if(typeof dlg.showModal === 'function') dlg.showModal() }); if(x && dlg) x.addEventListener('click', ()=>{ if(typeof dlg.close === 'function') dlg.close() }) }
+function d() {
+  const o = $(A.openDialog);
+  const x = $(A.closeDialog);
+  const dlg = document.getElementById('dialog');
+
+  if (o && dlg) {
+    o.addEventListener('click', (e) => {
+      e.preventDefault(); // <<< EKLENEN SATIR
+      dlg.showModal();
+    });
+  }
+
+  if (x && dlg) {
+    x.addEventListener('click', (e) => {
+      e.preventDefault(); // <<< EKLENEN SATIR
+      dlg.close();
+    });
+  }
+}
 document.addEventListener('DOMContentLoaded', ()=>{ i(); d(); });
