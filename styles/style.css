@@ -131,7 +131,7 @@
 
 @supports (text-stroke: 1px #fff) {
   .card__image-caption {
-    text-shadow: 1px #fff;
+    
     text-shadow: none;
   }
 }
