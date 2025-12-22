@@ -3,6 +3,7 @@
   flex-direction: column;
   inline-size: clamp(320px, 100vw, 700px);
   min-inline-size: 320px;
+  min-height: 100vh;
   min-block-size: 100dvb;
   margin: 100px auto;
   background-color: #1a1a1a;
@@ -285,5 +286,11 @@
   .footer__save-button-icon {
     width: 28px;
     height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    margin: 0 auto;
   }
 }
