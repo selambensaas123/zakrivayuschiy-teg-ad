@@ -82,32 +82,38 @@
   width: 100%;
 }
 
-.card:nth-child(2) .card__image {
+/* ✅ checklist: filtreler her görsele benzersiz class ile */
+.card__image--one {
+  filter: grayscale(30%);
+}
+
+.card__image--two {
   filter: grayscale(80%);
 }
 
-.card:nth-child(3) .card__image {
+.card__image--three {
   filter: saturate(400%);
 }
 
-.card:nth-child(4) .card__image {
+.card__image--four {
   filter: hue-rotate(30deg);
 }
 
-.card:nth-child(5) .card__image {
+.card__image--five {
   filter: invert(80%);
 }
 
-.card:nth-child(6) .card__image {
+.card__image--six {
   filter: sepia(90%);
 }
 
-.card:nth-child(7) .card__image {
+.card__image--seven {
   filter: blur(20px);
 }
 
-.card:nth-child(8) .card__image {
-  filter: blur(2px) contrast(130%) saturate(130%) hue-rotate(90deg) saturate(130%) contrast(40%);
+/* ✅ multiple filter (şart) */
+.card__image--eight {
+  filter: blur(2px) contrast(130%) saturate(130%) hue-rotate(90deg) contrast(40%);
 }
 
 .card__image-caption {
@@ -117,22 +123,17 @@
   opacity: 0.5;
   mix-blend-mode: hard-light;
   font-family: var(--font-family-deco);
-  text-shadow: 1px 1px 0 #fff,
-               1px -1px 0 #fff,
-               -1px 1px 0 #fff,
-               -1px -1px 0 #fff;
+
+  /* fallback */
+  text-shadow: 1px 1px 0 var(--label-stroke-color),
+               1px -1px 0 var(--label-stroke-color),
+               -1px 1px 0 var(--label-stroke-color),
+               -1px -1px 0 var(--label-stroke-color);
 }
 
-@supports (-webkit-text-stroke: 1px #fff) {
+@supports (-webkit-text-stroke: 1px #000) {
   .card__image-caption {
-    -webkit-text-stroke: 1px #fff;
-    text-shadow: none;
-  }
-}
-
-@supports (text-stroke: 1px #fff) {
-  .card__image-caption {
-    
+    -webkit-text-stroke: 1px var(--label-stroke-color);
     text-shadow: none;
   }
 }
@@ -200,6 +201,8 @@
 .button__text {
   mix-blend-mode: difference;
   font-family: var(--font-family-deco);
+  position: relative; /* text'i pseudo'nun üstünde tut */
+  z-index: 1;
 }
 
 .card__like-button {
@@ -235,7 +238,9 @@
   opacity: 0;
   font-family: var(--font-family-deco);
   font-size: var(--font-size-medium);
-  animation: disappear 0.3s forwards;
+
+  /* ✅ var olan keyframes’i kullan */
+  animation: uiFadeOut 0.3s forwards;
 }
 
 .dialog[open] {
@@ -244,16 +249,18 @@
   position: fixed;
   opacity: 1;
   z-index: 1000;
-  animation: appear 0.3s ease;
+
+  /* ✅ var olan keyframes’i kullan */
+  animation: uiFadeIn 0.3s ease;
 }
 
 .dialog::backdrop {
   background-color: rgb(0 0 0 / 0.75);
-  animation: disappear 0.3s ease forwards;
+  animation: uiFadeOut 0.3s ease forwards;
 }
 
 .dialog[open]::backdrop {
-  animation: appear 0.3s ease forwards;
+  animation: uiFadeIn 0.3s ease forwards;
 }
 
 .dialog__content {
